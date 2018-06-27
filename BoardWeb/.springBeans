@@ -8,6 +8,8 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
+		<config>src/main/webapp/WEB-INF/action-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/config/presentation-layer.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

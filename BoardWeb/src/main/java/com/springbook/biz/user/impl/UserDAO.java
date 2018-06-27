@@ -24,13 +24,15 @@ public class UserDAO {
 		//회원 등록
 		public UserVO getUser(UserVO vo) {
 			UserVO user = null;
-			System.out.println("===>JDBC로 getUser() 기능 처리");
 			try {
+				System.out.println("===>JDBC로 getUser() 기능 처리");
 				conn = JDBCUtil.getConnection();
 				stmt = conn.prepareStatement(USER_GET);
+				System.out.println("DB연결은 성공");
 				stmt.setString(1, vo.getId());
 				stmt.setString(2, vo.getPassword());
-				stmt.executeUpdate();
+				rs=stmt.executeQuery();
+				System.out.println("값 저장하기 성공");
 				if(rs.next()) {
 					user = new UserVO();
 					user.setId(rs.getString("ID"));

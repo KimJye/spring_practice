@@ -107,6 +107,7 @@ public class BoardDAO {
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(BOARD_LIST);
+			System.out.println("DB성공함");
 			rs=stmt.executeQuery();
 			while(rs.next()) {
 				BoardVO board = new BoardVO();
@@ -120,6 +121,7 @@ public class BoardDAO {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("DB 값 저장 실패..");
 		}finally {
 			JDBCUtil.close(rs, stmt, conn);
 		}
