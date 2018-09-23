@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.ProfessorMapper">
+
+  <select id="findOne" resultType="Professor">
+    SELECT * FROM Professor WHERE id = #{id}
+  </select>
+  
+  <select id="findByDepartmentId" resultType="Professor">
+  select p.id, p.professorName, d.departmentName from professor p LEFT JOIN department d ON p.departmentId = d.id where d.id= #{srchText} 
+  </select>
+  
+  <select id="findAll" resultType="Professor">
+    SELECT p.*, d.departmentName
+    FROM Professor p LEFT JOIN department d ON p.departmentId = d.id
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"> 
+  <!-- useGeneratedKeys="true" keyProperty="id"//이거는 insert하자마자 id값이 자동으로 부여된것이 setid되어서 채워진다. 
+  따라서 방금 insert된 id값을 알 수가 있다. 이 기능은 게시글에서 저장할때 첨부파일 있을 때(테이블 나눠서 저장할 때). 단 primery key가 오토인그리먼트일때-->
+    INSERT Student (studentNumber, name, departmentId, year)
+    VALUES (#{studentNumber}, #{name}, #{departmentId}, #{year})
+  </insert>
+
+  <update id="update">
+    UPDATE Professor SET 
+      professorName = #{professorName},  
+      departmentId = #{departmentId},  
+    WHERE id = #{id}
+  </update>
+
+  <delete id="delete">
+    DELETE FROM Professor WHERE id = #{id}
+  </delete>
+
+</mapper>

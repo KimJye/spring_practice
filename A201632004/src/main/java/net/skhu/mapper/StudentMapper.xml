@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.StudentMapper">
+
+  <select id="findOne" resultType="Student">
+    SELECT * FROM Student WHERE id = #{id}
+  </select>
+  
+  <select id="findByStudentNumber" resultType="Student">
+    SELECT * FROM Student WHERE studentNumber = #{studentNumber}
+  </select>   
+
+  <select id="findAll" resultType="Student">
+    SELECT s.*, d.departmentName
+    FROM Student s LEFT JOIN department d ON s.departmentId = d.id
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"> 
+  <!-- useGeneratedKeys="true" keyProperty="id"//이거는 insert하자마자 id값이 자동으로 부여된것이 setid되어서 채워진다. 
+  따라서 방금 insert된 id값을 알 수가 있다. 이 기능은 게시글에서 저장할때 첨부파일 있을 때(테이블 나눠서 저장할 때). 단 primery key가 오토인그리먼트일때-->
+    INSERT Student (studentNumber, name, departmentId, year)
+    VALUES (#{studentNumber}, #{name}, #{departmentId}, #{year})
+  </insert>
+
+  <update id="update">
+    UPDATE Student SET 
+      studentNumber = #{studentNumber}, 
+      name = #{name}, 
+      departmentId = #{departmentId}, 
+      year = #{year} 
+    WHERE id = #{id}
+  </update>
+
+  <delete id="delete">
+    DELETE FROM Student WHERE id = #{id}
+  </delete>
+
+</mapper>
