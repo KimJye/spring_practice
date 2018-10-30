@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=Spring02/src\/main\/java&lt;edu.spring.ex02.persistence{BoardDao.java[BoardDao" modifiers="513" timestamp="1511127690000"/>
+<typeInfo handle="=Spring02/src\/main\/java&lt;edu.spring.ex02.service{BoardService.java[BoardService" modifiers="513" timestamp="1511127826000"/>
+<typeInfo handle="=Spring02/src\/main\/java&lt;edu.spring.ex02.persistence{MemberDao.java[MemberDao" modifiers="513" timestamp="1510862554000"/>
+<typeInfo handle="=Spring02/src\/main\/java&lt;edu.spring.ex02.service{MemberService.java[MemberService" modifiers="513" timestamp="1510862578000"/>
+<typeInfo handle="=Spring03/src\/main\/java&lt;edu.spring.ex03.persistence{ReplyDao.java[ReplyDao" modifiers="513" timestamp="1511393888000"/>
+<typeInfo handle="=Spring03/src\/main\/java&lt;edu.spring.ex03.service{ReplyService.java[ReplyService" modifiers="513" timestamp="1511218518000"/>
+<typeInfo handle="=Spring03/src\/main\/java&lt;edu.spring.ex03.mappers{ReplyMapper.java[ReplyMapper" modifiers="513" timestamp="1511394174000"/>
+<typeInfo handle="=Spring03/src\/main\/java&lt;edu.spring.ex03.persistence{BoardDao.java[BoardDao" modifiers="513" timestamp="1511390666000"/>
+<typeInfo handle="=Spring04/src\/main\/java&lt;edu.spring.ex04.persistence{MemberDao.java[MemberDao" modifiers="513" timestamp="1511474546000"/>
+<typeInfo handle="=Spring04/src\/main\/java&lt;edu.spring.ex04.service{MemberService.java[MemberService" modifiers="513" timestamp="1511475078000"/>
+</typeInfoHistroy>

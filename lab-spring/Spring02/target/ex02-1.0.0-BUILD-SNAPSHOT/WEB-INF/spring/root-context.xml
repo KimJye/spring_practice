@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- bean: 스프링 프레임워크가 생성해서 관리하는 자바 객체 -->
+    <bean id="dataSource"
+        name="dataSource"
+        class="oracle.jdbc.pool.OracleDataSource">
+        <property name="URL"
+            value="jdbc:oracle:thin:@localhost:1521:orcl" />
+        <property name="user" value="scott" />
+        <property name="password" value="tiger" />
+    </bean>
+    
+    <bean id="sqlSessionFactory"
+        name="sqlSessionFactory"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation"
+            value="classpath:/mybatis-config.xml" />
+        <property name="mapperLocations"
+            value="classpath:/mappers/*.xml" />
+    </bean>
+    
+    <bean id="sqlSession" name="sqlSession"
+        class="org.mybatis.spring.SqlSessionTemplate"
+        destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory"
+            ref="sqlSessionFactory" />
+    </bean>
+    
+    <!--
+    <context:component-scan base-package="edu.spring.ex02.persistence" />
+    <context:component-scan base-package="edu.spring.ex02.service" />
+    -->
+    <!-- component-scan의 대상은 base-package에서 설정한
+    패키지와 그 하위의 모든 디렉토리를 포함.
+    만약 하위 디렉토리의 클래스들 중 특정 어노테이션의 콤포넌트를 제외하고 싶으면,
+    exclude-filter 태그를 사용해서 제외시켜면 됨. -->
+    <context:component-scan base-package="edu.spring.ex02">
+        <context:exclude-filter type="annotation" 
+            expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+</beans>
+
+
+

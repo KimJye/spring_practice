@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- bean: 스프링 프레임워크가 생성해서 관리하는 자바 객체 -->
+    <bean id="dataSource"
+        name="dataSource"
+        class="oracle.jdbc.pool.OracleDataSource">
+        <property name="URL"
+            value="jdbc:oracle:thin:@localhost:1521:orcl" />
+        <property name="user" value="scott" />
+        <property name="password" value="tiger" />
+    </bean>
+    
+    <bean id="sqlSessionFactory"
+        name="sqlSessionFactory"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation"
+            value="classpath:/mybatis-config.xml" />
+        <property name="mapperLocations"
+            value="classpath:/mappers/*.xml" />
+    </bean>
+    
+    <bean id="sqlSession" name="sqlSession"
+        class="org.mybatis.spring.SqlSessionTemplate"
+        destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory"
+            ref="sqlSessionFactory" />
+    </bean>
+    
+    <!-- Dao, Service 객체를 자바 빈으로 관리 -->
+    <context:component-scan base-package="edu.spring.ex03" >
+        <context:exclude-filter type="annotation" 
+            expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- MyBatis가 사용하는 Mapper 객체를 자바 빈으로 설정 -->
+    <mybatis-spring:scan base-package="edu.spring.ex03.mappers"/>
+    
+    <bean id="logger"
+        class="edu.spring.ex03.logger.NewLogger"/>
+    
+    <!-- AOP 기능을 어노테이션 기반으로 설정 -->
+    <aop:aspectj-autoproxy />
+    
+    <!-- MyBatis의 DB 트랜잭션 관리를 하는 클래스를 bean으로 설정 -->
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 트랜잭션 관리를 어노테이션 기반으로 하겠다고 설정 -->
+    <tx:annotation-driven/>
+    
+</beans>
+
+
+
+
+

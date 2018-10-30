@@ -1,0 +1,12 @@
+INDEX VERSION 1.4+D:\bdsucess\webshare zipped root\lab-spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1636905284.index
+2936808711.index
+3426832981.index
+2297599089.index
+378929618.index
+2969851564.index
+3447548098.index
+4294288615.index
+2409582696.index
+956937174.index
+1086794642.index

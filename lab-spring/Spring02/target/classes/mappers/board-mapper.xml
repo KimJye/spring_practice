@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.spring.ex02.BoardMapper">
+
+    <select id="selectAll" resultType="Board">
+    SELECT * FROM ${tblBoard} ORDER BY ${colBno} DESC
+    </select>
+    
+    <insert id="insert">
+    INSERT INTO ${tblBoard}
+    (${colTitle}, ${colContent}, ${colUserid}, ${colRegdate})
+    VALUES (#{title}, #{content}, #{userid}, sysdate)
+    </insert>
+    
+    <update id="update">
+    UPDATE ${tblBoard} 
+    SET ${colTitle} = #{title}, ${colContent} = #{content}, ${colRegdate} = sysdate
+    WHERE ${colBno} = #{bno}
+    </update>
+    
+    <delete id="delete">
+    DELETE FROM ${tblBoard}
+    WHERE ${colBno} = #{bno}
+    </delete>
+    
+    <select id="selectByUserid" resultType="Board">
+    SELECT * FROM ${tblBoard}
+    WHERE ${colUserid} LIKE #{userid}
+    ORDER BY ${colBno} DESC
+    </select>
+
+    <select id="selectByTitleOrContent" resultType="Board">
+    SELECT * FROM ${tblBoard}
+    WHERE ${colTitle} LIKE #{title} OR ${colContent} LIKE #{content}
+    ORDER BY ${colBno} DESC
+    </select>
+    
+    <select id="selectByBno" resultType="Board">
+    SELECT * FROM ${tblBoard}
+    WHERE ${colBno} = #{bno}
+    </select>
+
+    <!-- Dynamic SQL 
+    MyBatis가 가지고 있는 특징: 
+    조건에 따라서 SQL 문장을 동적으로 만들어 주는 기능 -->
+    <select id="search" resultType="Board">
+    SELECT * FROM ${tblBoard}
+    WHERE
+    <if test="searchType == 1">
+        ${colUserid} LIKE #{searchKeyword}
+    </if>
+    <if test="searchType == 2">
+        ${colTitle} LIKE #{searchKeyword}
+    </if>
+    <if test="searchType == 3">
+        ${colTitle} LIKE #{searchKeyword}
+        OR
+        ${colContent} LIKE #{searchKeyword}
+    </if>
+    ORDER BY ${colBno} DESC
+    </select>
+
+    <select id="search2" resultType="Board">
+    SELECT * FROM ${tblBoard}
+    WHERE
+    <choose>
+        <when test="searchType == 1">
+            ${colUserid} LIKE #{searchKeyword}
+        </when>
+        <when test="searchType == 2">
+            ${colTitle} LIKE #{searchKeyword}
+        </when>
+        <when test="searchType == 3">
+            ${colTitle} LIKE #{searchKeyword}
+            OR
+            ${colContent} LIKE #{searchKeyword}
+        </when>
+    </choose>
+    ORDER BY ${colBno} DESC
+    </select>
+
+    <!-- 페이지 처리를 위한 SQL 문장들 -->
+    <!-- Board 테이블의 전체 데이터 개수 -->
+    <select id="totalCount" resultType="Integer">
+    select count(bno) cnt from test_board
+    </select>
+    
+    <!-- 한 페이지에 보여줄 게시글만 검색 -->
+    <!--  MySQL, Oracle 12c
+    select * from test_board order by bno desc
+    limit #{start}, #{end}
+    -->
+    <select id="selectPage" resultType="Board">
+    select b.bno, b.title, b.content, b.userid, b.regdate
+    from (
+        select rownum rn, a.*
+        from (
+            select * from test_board order by bno desc
+        ) a
+    ) b
+    where rn between #{start} and #{end}
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
