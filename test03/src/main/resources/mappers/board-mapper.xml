@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardmapper">
+
+    <insert id="insertboard">
+    INSERT INTO ${tblstudyboard}(${userid}, ${title}, ${content})
+    VALUES (#{userid}, #{title}, #{content})
+    </insert>
+
+    <delete id="deleteboard">
+    DELETE FROM ${tblstudyboard}
+    WHERE bno = #{bno}
+    </delete>
+
+    <select id="selectPage" resultType="board">
+    select b.bno, b.title, b.content, b.userid
+    from (
+        select rownum rn, a.*
+        from (
+            select * from ${tblstudyboard} order by bno desc
+        ) a
+    ) b
+    where rn between #{start} and #{end}
+    </select>
+
+    <select id="totalCount" resultType="Integer">
+    select count(bno) cnt from ${tblstudyboard}
+    </select>
+
+    <select id="selectByBno" resultType="board">
+    SELECT * FROM ${tblstudyboard}
+    WHERE bno = #{bno}
+    </select>
+
+</mapper>

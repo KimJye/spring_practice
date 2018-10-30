@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <properties>
+        <property name="tblstudyboard" value="studyboard" />
+        <property name="userid" value="userid" />
+        <property name="title" value="title" />
+        <property name="content" value="content" />
+
+        <!--reply properties-->
+        <!--설정해둔 name을 사용하고 싶으신 분은 이것도 입력-->
+        <property name="tblstudyreply" value="tblstudyreply"/>
+        <property name="bno" value="bno"/>
+        <property name="rno" value="rno"/>
+        <property name="replier" value="replier"/>
+        <property name="rcontent" value="rcontent"/>
+    </properties>
+
+    <typeAliases>
+        <package name="Domain" />
+    </typeAliases>
+
+</configuration>

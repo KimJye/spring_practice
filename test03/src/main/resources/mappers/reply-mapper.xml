@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--골자는 board-maper.xml과 동일-->
+<mapper namespace="replymapper">
+
+    <!--입력-->
+    <insert id="insertReply">
+    INSERT INTO ${tblstudyreply}(${bno}, ${replier}, ${rcontent})
+    VALUES (#{bno}, #{replier}, #{rcontent})
+    </insert>
+
+    <!--삭제-->
+    <delete id="deleteReply">
+    DELETE FROM ${tblstudyreply}
+    WHERE rno = #{rno}
+    </delete>
+
+    <!--read-->
+    <select id="selectByBno" resultType="reply">
+    SELECT * FROM ${tblstudyreply}
+	WHERE bno = #{bno}
+	ORDER BY rno DESC
+    </select>
+
+</mapper>

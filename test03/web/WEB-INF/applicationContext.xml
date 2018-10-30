@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <bean id="dataSource" name="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+        <property name="URL" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+        <property name="user" value="scott" />
+        <property name="password" value="tiger" />
+    </bean>
+
+    <bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:/mappers/*.xml" />
+    </bean>
+
+    <bean id="sqlSession" name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+          destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <context:component-scan base-package="persistance">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mybatis:scan base-package="mappers"/>
+
+</beans>
