@@ -1,3 +1,7 @@
+/.metadata/
+
+*.properties
+*.class
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
