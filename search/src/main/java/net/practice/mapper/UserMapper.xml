@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.practice.mapper.UserMapper">
+
+	<select id="findAllOrderBy" resultType="User"> 
+		SELECT * FROM User 
+		ORDER BY ${order} 
+		LIMIT #{count}   
+	</select>
+	
+	<select id="findByNameOrUserid" resultType="User">
+		SELECT * FROM User WHERE id = id
+		<if test="name != null"> 
+			AND name= #{name}     
+		</if>
+		<if test="userid != null"> 
+			AND userid = #{userid}     
+		</if>
+	</select>
+	
+	<select id="findByNameOrUserid2" resultType="User">
+		SELECT * FROM User
+		<where>
+			<if test="name != null"> AND name = #{name}       </if>
+			<if test="userid != null"> AND userid = #{userid}       </if>
+		</where>
+	</select>
+	
+	<select id="findByIdList" resultType="User">
+		SELECT * FROM User WHERE id IN
+		<foreach item="id" collection="idList" open="(" separator="," close=")">
+			#{id}     
+		</foreach>
+	</select>
+	
+	<update id="update">
+		UPDATE User
+		<set>
+			<if test="userid != null">userid = #{userid},</if>
+			<if test="name != null">name = #{name},</if>
+			<if test="email != null">email = #{email},</if>
+			<if test="userType != null">userType = #{userType},</if>
+			<if test="departmentId != 0">departmentId = #{departmentId}</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+</mapper>
