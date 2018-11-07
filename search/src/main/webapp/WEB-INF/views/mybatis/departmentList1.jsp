@@ -18,7 +18,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="${R}res/common.js"></script>
 <link rel="stylesheet" href="${R}res/common.css">
-
+<title>학과별 학생 조회</title>
 </head>
 <body>
 	<div class="container">
