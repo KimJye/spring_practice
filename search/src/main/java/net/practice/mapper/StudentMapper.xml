@@ -35,6 +35,23 @@
   	SELECT * FROM Student WHERE departmentId = #{departmentId}
   </select>
   
+  <!-- 학생 조회할 때 학과 레코드로 같이 조회 (resultMap) -->
+  <select id="findAllWithDepartment" resultMap="resultMap1">
+  	SELECT s.*, d.id departmentId, d.departmentName departmentName
+  	FROM Student s LEFT JOIN Department d ON d.id = s.departmentId
+  </select>
+  
+  <resultMap id="resultMap1" type="Student">
+  	<id property="id" column="id"/>
+  	<result property="studentNumber" column="studentNumber"/>
+  	<result property="name" column="name"/>
+  	<result property="year" column="year"/>
+  	<result property="departmentId" column="departmentId"/>
+  	<association property="department" javaType="Department">
+  		<id property="id" column="departmentId"/>
+  		<result property="departmentName" column="departmentName"/>
+  	</association>
+  </resultMap>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id"> 
   <!-- useGeneratedKeys="true" keyProperty="id"//이거는 insert하자마자 id값이 자동으로 부여된것이 setid되어서 채워진다. 
   따라서 방금 insert된 id값을 알 수가 있다. 이 기능은 게시글에서 저장할때 첨부파일 있을 때(테이블 나눠서 저장할 때). 단 primery key가 오토인그리먼트일때-->
@@ -51,8 +68,15 @@
     WHERE id = #{id}
   </update>
 
-  <delete id="delete">
+	<!-- mysql transaction 구현 -->
+ <!-- <delete id="delete">
+  	START TRANSACTION;
+  	DELETE FROM register WHERE studentId = #{id};
     DELETE FROM Student WHERE id = #{id}
+    COMMIT;
   </delete>
-
+ --> 
+ 	<delete id="delete">
+ 		DELETE FROM student WHERE id=#{id};
+ 	</delete>
 </mapper>
