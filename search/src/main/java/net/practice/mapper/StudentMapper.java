@@ -14,6 +14,7 @@ public interface StudentMapper {
 	List<Student>findByName(String srchText);
 	List<Student>findByDepartmentId(int departmentId);
 	List<Student>findStudentByDepartmentId(int departmentId);
+	List<Student>findAllWithDepartment();
 	void insert(Student student);
 	void update(Student student);
 	void delete(int id);
