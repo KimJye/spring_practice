@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.practice.dto.Department;
 import net.practice.dto.Student;
 import net.practice.mapper.DepartmentMapper;
+import net.practice.mapper.RegisterMapper;
 import net.practice.mapper.StudentMapper;
 
 @Controller
@@ -20,6 +23,7 @@ public class StudentController {
 
     @Autowired StudentMapper studentMapper;
     @Autowired DepartmentMapper departmentMapper;
+    @Autowired RegisterMapper registerMapper;
 
     @RequestMapping("list")
     public String list(Model model) {
@@ -151,8 +155,16 @@ public class StudentController {
     }
 
     @RequestMapping("delete")
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public String delete(Model model, @RequestParam("id") int id) {
-        studentMapper.delete(id);
+        registerMapper.deleteByStudentId(id);
+    	studentMapper.delete(id);
         return "redirect:list";
     }
+
+    @RequestMapping("studentList")
+	public String studentList(Model model) {
+		model.addAttribute("students",studentMapper.findAllWithDepartment());
+		return "student/studentList";
+	}
 }
