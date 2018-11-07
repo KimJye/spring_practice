@@ -16,5 +16,13 @@
  </br>
  <a href="mybatis/departmentList1">mybatis/departmentList1</a>
  </br>
+ <a href="mybatis/departmentList2">mybatis/departmentList2(using resultMap)</a>
+ </br>
+ <a href="student/studentList">student/studentList(using resultMap) with CRUD</a>
+ </br>
+ <a href="mybatis/dynamicSQL">mybatis/dynamicSQL</a>
+ </br>
+ <a href="user/userList">user/userList</a>
+ </br>
  </body> 
  </html>
