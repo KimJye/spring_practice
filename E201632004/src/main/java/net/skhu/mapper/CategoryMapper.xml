@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.CategoryMapper">
+
+  <select id="findAll" resultType="Category">
+      SELECT * FROM Category
+  </select>
+ 
+  <insert id="insert">
+  	INSERT category (categoryName) VALUE(#{categoryName})
+  </insert>
+  
+  <update id="update">
+  	UPDATE category SET categoryName = #{categorName} WHERE id=#{id}
+  </update>
+  
+  <delete id="delete">
+  	DELETE FROM category WHERE id=#{id}
+  </delete>
+</mapper>

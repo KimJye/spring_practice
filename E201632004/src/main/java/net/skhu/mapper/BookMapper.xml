@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.BookMapper">
+
+	<!-- mybatis resutlmap 기능 구현 -->
+	<select id="findAllWithCategoryPublisher" resultMap ="resultMap1">
+		SELECT  b.*, c.categoryName, p.title publisherName
+		FROM book b 
+		LEFT JOIN category c ON b.categoryId = c.id
+		LEFT JOIN publisher p ON b.publisherId = p.id
+	</select>
+	
+	<resultMap id="resultMap1" type="Book">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="author" column="author"/>
+		<result property="categoryId" column="categoryId"/>
+		<result property="price" column="price"/>
+		<result property="publisherId" column="publisherId"/>
+		<result property="available" column="available"/>
+		<association property="category" javaType="Category">
+			<id property="id" column="categoryId"/>
+			<result property="categoryName" column="categoryName"/>
+		</association>
+		<association property="publisher" javaType="Publisher">
+			<id property="id" column="PublisherId"/>
+			<result property="title" column="publisherName"/>
+		</association>
+	</resultMap>
+	<select id="findAll" resultType="Book">
+		SELECT  b.*, c.categoryName, p.title publisherName
+		FROM book b 
+		LEFT JOIN category c ON b.categoryId = c.id
+		LEFT JOIN publisher p ON b.publisherId = p.id
+	</select>
+	
+	<select id="findOne" resultType="Book">
+		SELECT * FROM book WHERE id= #{id}
+	</select>
+	
+	<insert id="insert">
+	 INSERT book (title, author, categoryId, price, publisherId, available) 
+	 VALUES (#{title},#{author},#{categoryId},#{price},#{publisherId},#{available});
+	
+	</insert>
+	
+	<update id="update">
+    UPDATE Book SET 
+      title = #{title}, 
+      author = #{author}, 
+      categoryId = #{categoryId}, 
+      price = #{price},
+      publisherId = #{publisherId},
+      available =  #{available} 
+    WHERE id = #{id}
+  </update>
+
+	<delete id="delete">
+		DELETE FROM book WHERE id=#{id}
+	</delete>
+</mapper>
