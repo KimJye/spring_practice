@@ -17,7 +17,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-default fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="home.jsp">티티</a>
+			<a class="navbar-brand" href="home.jsp">모찌</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
 	</nav>
 	<!-- 사진 -->
 	<div align="center" style="margin-top: 80px;">
-		<img src="img/tiber.jpg" width="200px" height="200px" align="middle" />
+		<img src="img/구로구.jpg" width="200px" height="200px" align="middle" />
 	</div>
 
 
@@ -64,9 +64,9 @@
 				<td>메뉴</td>
 				<td>
 					<ul style="align: left;">
-						<li>떡볶이</li>
-						<li>피자</li>
-						<li>치킨마요</li>
+						<li>문어</li>
+						<li>키조개</li>
+						<li>해물탕</li>
 					</ul>
 				</td>
 			</tr>
@@ -75,7 +75,7 @@
 	</div>
 
 	<!-- 지도 -->
-	<div id="map" style="width: 400px; height: 400px; margin-left: 450px;"></div>
+	<div id="map" style="width: 300px; height: 300px; margin-left: 500px;"></div>
 	<script>
       var map = new naver.maps.Map('map');
       var myaddress = '구로구 연동로 320';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
@@ -119,7 +119,7 @@
 			</tr>
 			<tr>
 				<td height="50">낑깡쥔 |</td>
-				<td>떡볶이 최고 ^____^</td>
+				<td>해물탕 최고 ^____^</td>
 			</tr>
 		</table>
 	</div>
