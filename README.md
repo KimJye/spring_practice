@@ -21,3 +21,4 @@
 * **search :** 개인적으로 응용하는 공간
 
 * **test03 :** spring MVC study project with intelij
+* **jpa10 :** JPA 
