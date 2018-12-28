@@ -1,0 +1,45 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.MySubjectMapper">
+	
+	<delete id="deleteById">
+		delete from mySubject
+		where userId = #{userId};
+	</delete>
+	
+	<insert id="insert" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT into mySubject(takeYear, takeSemester, subjectCode,
+		subjectName, completionDivision, credit, score, userId)
+		VALUES
+		<foreach collection="list" item="mySubject" separator=" , ">
+			('${mySubject.takeYear}', '${mySubject.takeSemester}',
+			'${mySubject.subjectCode}', '${mySubject.subjectName}',
+			'${mySubject.completionDivision}', '${mySubject.credit}',
+			'${mySubject.score}', '${mySubject.userId}')
+		</foreach>
+	</insert>
+	
+	<select id="findAll" resultType="MySubject">
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject where userId like #{userId}
+
+	</select>
+	<select id="findByYearAndSemester" resultType="MySubject">
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject
+		where userId like #{userId} and takeYear like #{takeYear} and takeSemester
+		like #{takeSemester}
+	</select>
+	
+	<select id="findByCode" resultType="MySubject">
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject
+		where subjectCode like '%' #{srchText} '%'
+	</select>
+	<select id="findByName" resultType="MySubject">
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject
+		where subjectName LIKE '%' #{srchText} '%'
+	</select>
+	
+</mapper>
