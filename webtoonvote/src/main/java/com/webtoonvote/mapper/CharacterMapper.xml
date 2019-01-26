@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtdmybatis-3-mapper.dtd">
+<mapper namespace="com.webtoonvote.mapper.CharacterMapper">
+	<select id="selectAll" parameterType="java.lang.String" resultType="com.webtoonvote.dto.CharacterDto">
+		select * 
+        from webtoon_character
+        where webtoon_vote_no
+	</select>	
+	<insert id="insert"> 
+    insert into webtoon_character(webtoon_vote_no, character_name, count, image)
+      values ( 
+      #{webtoonId}, #{person_name},#{count},#{person_image})
+	</insert>
+	<select id="selectTotal" parameterType="java.lang.String" resultType="java.lang.String">
+		select sum(count)
+		from webtoon_character 
+		where webtoon_vote_no
+	</select>
+   <insert id="insertWebtoonCharac">
+   insert into webtoon_character(webtoon_vote_no, character_name, count) 
+   values(#{webtoon_vote_no}, #{character_name}, #{count})   
+   </insert>
+   
+   <select id="findByWebtoon" resultType="CharacterDto">
+   select * from webtoon_character where webtoon_vote_no like #{webtoon_vote_no};
+   </select>
+   
+   <update id="voteCharacter">
+      update webtoon_character set count = count+1 where character_no like #{character_no} and webtoon_vote_no like #{webtoon_vote_no};
+   </update>
+</mapper>
