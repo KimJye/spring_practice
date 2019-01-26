@@ -1,4 +1,4 @@
-package net.skhu;
+package net.skhu.form0;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class Form0ApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }
+
