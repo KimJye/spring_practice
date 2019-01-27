@@ -53,7 +53,9 @@
         <a class="btn btn-primary" href="edit?id=${ article.id }&${ pagination.queryString }">
             <i class="glyphicon glyphicon-pencil"></i> 수정
         </a>
-
+        <a class="btn btn-danger" href="delete?id=${ article.id }&${ pagination.queryString }" data-confirm-delete> <i
+                class="glyphicon glyphicon-remove"></i> 삭제
+        </a>
         <a class="btn btn-default" href="list?${ pagination.queryString }">
             <i class="glyphicon glyphicon-list"></i> 목록으로
         </a>
